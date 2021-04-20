@@ -10,6 +10,7 @@ export type Post = {
   data: {
     body: string;
     permalink: string;
+    replies: any;
   };
 };
 
