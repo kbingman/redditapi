@@ -1,19 +1,24 @@
-import fetch from "isomorphic-unfetch";
-import { Listing, Post } from "./types";
+import fetch from 'isomorphic-unfetch';
+import {Listing, Post} from './types';
 
 const URL = `https://www.reddit.com/r/TheCulture/comments/megvqx/which_culture_ship_name_would_best_replace_the.json`;
 
-async function fetchListings(url: string): Promise<Listing[]> {
+export const getBody = (item: Post) => item.data.body;
+export async function fetchListings(url: string): Promise<Listing[]> {
   const response = await fetch(url);
   return response.json();
 }
 
-async function main() {
+export async function fetchRedditApi() {
   const listings = await fetchListings(URL);
-  const children = listings[1]?.data.children;
+  const splitItems = listings[1]?.data.children
+    .map(getBody)
+    .map(item => item.split('\n'))
+    .flat()
+    .filter(item => item !== '')
+    .map(item => item.replace(/_|\*/g, ''));
 
-  console.log(children);
+  return splitItems;
 }
 
-main();
-
+// main();
