@@ -1,7 +1,7 @@
 import { fetchRedditApi, sanitizeString, formatListings } from "./index";
 
 describe("reddit api", () => {
-  test.only("it works", async () => {
+  test("it works", async () => {
     const listings = await fetchRedditApi();
     expect(true).toBe(true);
   });
