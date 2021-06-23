@@ -1,4 +1,4 @@
-import { fetchRedditApi, sanitizeString, formatListings } from "./index";
+import { fetchRedditApi, sanitizeString, formatListings, ourOwnPipeWithTwoArgs } from "./index";
 
 describe("reddit api", () => {
   test.only("it works", async () => {
@@ -33,4 +33,13 @@ describe("format listings", () => {
   });
 });
 
-// body: 'GCU *Pure Big Mad Boat Man*'
+describe('our own pipe with two fns', () => {
+  const add1 = (n: number) => n + 1;
+  const multiply2 = (n: number) => n * 2;
+  test.only('bla bla', () => {
+    const results = ourOwnPipeWithTwoArgs(add1, multiply2);
+    console.log(results(222));
+  });
+});
+
+// body: *Pure Big Mad Boat Man*'

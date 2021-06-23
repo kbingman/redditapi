@@ -63,4 +63,32 @@ export const ourOwnPipe =
     }, arg);
   };
 
+//Typing away with generics
+export const ourOwnPipeWithTwoArgs =
+<T>(...fns:[fn1: (arg: T) => T , fn2: (arg:T) => T]) =>
+(arg: T) => {
+  return fns.reduce((acc, fn) => {
+    return fn(acc);
+  }, arg);
+};
+
+//Attempt with different parameters
+// export const ourOwnPipeWithTwoArgs =
+// <T, U>(...fns:[fn1: (arg: T) => U , fn2: (arg:U) => U]) =>
+// (arg: T) => {
+//   return fns.reduce((acc, fn) => {
+//     return fn(acc);
+//   }, arg: T);
+// };
+
+const toUpperCase = (s: string) => s.toUpperCase();
+const yell = (s: string) => s+'!!!'
+const add1 = (n: number) => n + 1;
+const multiply2 = (n: number) => n * 2;
+
+//Wont work with same type for args and return value. 
+const toString = (n: number) => n.toString();
+
+console.log(ourOwnPipeWithTwoArgs(toUpperCase, yell)('hola'))
+
 // main();
